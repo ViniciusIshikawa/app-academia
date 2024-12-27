@@ -1,0 +1,59 @@
+/* src/assets/styles/base/_reset.scss */
+
+/* Remove padding, margin e bordas padrão */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  line-height: 1.5;
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%; /* Impede a mudança de tamanho do texto no iOS */
+  -ms-text-size-adjust: 100%;    /* Impede a mudança de tamanho do texto no IE */
+}
+
+body {
+  -webkit-font-smoothing: antialiased; /* Suaviza as fontes no Chrome e Safari */
+  -moz-osx-font-smoothing: grayscale;  /* Suaviza as fontes no Firefox */
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit; /* Garantir que os controles de formulário herdem as fontes do documento */
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit; /* Remove a cor padrão do link e a sublinha */
+}
+
+ul, ol {
+  list-style: none; /* Remove os marcadores das listas */
+}
+
+/* Remove a aparência padrão dos botões e campos de formulário no iOS e Android */
+button, input, select, textarea {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Garantir que o layout de tabelas seja mais controlado */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
