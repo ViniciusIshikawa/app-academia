@@ -11,7 +11,7 @@
     @for (exercicio of exerciciosTreino; track $index) {
       <mat-card class="example-card" appearance="outlined">
         <mat-card-header>
-          <img id="imagem-exercicio" mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+          <img id="imagem-exercicio" mat-card-md-image [src]="exercicio.linkCapa">
 
           <mat-card-title-group>
             <mat-card-title>{{exercicio.nome}}</mat-card-title>

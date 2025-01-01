@@ -3,4 +3,5 @@ export interface Exercicio {
   repeticao: string;
   serie: number;
   peso: number;
+  linkCapa: string;
 }

@@ -30,76 +30,88 @@ export class ExerciciosComponent implements OnInit{
       nome: 'Supino reto com barra',
       repeticao: '8 - 12',
       serie: 4,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoA/supino-reto-barra.png'
     },
     {
       nome: 'Supino inclinado com halteres',
       repeticao: '8 - 12',
       serie: 4,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoA/supino-inclinado-com-halteres.png'
     },
     {
       nome: 'Crossover (ou crucifixo na polia)',
       repeticao: '12 - 15',
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoA/crucifixo-crossover-alto.png'
     },
     {
       nome: 'Paralelas (ou supino fechado)',
       repeticao: '10 - 12',
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoA/supino-fechado.png'
     },
     {
       nome: 'Tríceps testa com barra EZ',
       repeticao: '10 - 12',
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoA/triceps-testa-barraW.png'
     },
     {
       nome: 'Tríceps na polia (barra reta ou corda)',
       repeticao: '12 - 15',
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoA/triceps-polia.png'
     }
   ];
 
   exerciciosTreinoB: Exercicio[] = [
     {
-      nome: 'Barra fixa (assistida se necessário',
+      nome: 'Barra fixa',
       repeticao: '6 - 10',
       serie: 4,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoB/barra-fixa.png'
     },
     {
       nome: "Remada curvada com barra",
       repeticao: "8 - 12",
       serie: 4,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoB/remada-curvada-barra.png'
     },
     {
       nome: "Puxador frente com pegada aberta",
       repeticao: "10 - 12",
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoB/puxador-aberto-frente.png'
     },
     {
       nome: "Remada unilateral com haltere",
       repeticao: "8 - 12",
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoB/remada-unilateral-halter.png'
     },
     {
       nome: "Rosca direta com barra EZ",
       repeticao: "10 - 12",
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoB/rosca-barraW.png'
     },
     {
       nome: "Rosca alternada com halteres",
       repeticao: "10 - 12",
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoB/rosca-alternada-halter.png'
     }
   ]
 
@@ -108,37 +120,43 @@ export class ExerciciosComponent implements OnInit{
       nome: "Agachamento livre",
       repeticao: "8 - 12",
       serie: 4,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoC/agachamento-livre.png'
     },
     {
       nome: "Leg press 45º",
       repeticao: "10 - 12",
       serie: 4,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoC/leg-45.png'
     },
     {
       nome: "Cadeira extensora",
       repeticao: "12 - 15",
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoC/cadeira-extensora.png'
     },
     {
       nome: "Stiff com barra ou halteres",
       repeticao: "10 - 12",
       serie: 4,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoC/stiff.png'
     },
     {
       nome: "Mesa flexora",
       repeticao: "12 - 15",
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoC/mesa-flexora.png'
     },
     {
       nome: "Panturrilha no leg press ou em pé",
       repeticao: "15 - 20",
       serie: 4,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoC/panturrilha.png'
     }
   ]
 
@@ -147,43 +165,50 @@ export class ExerciciosComponent implements OnInit{
       nome: "Desenvolvimento com barra ou halteres",
       repeticao: "8 - 12",
       serie: 4,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoD/desenvolvimento-halteres.png'
     },
     {
       nome: "Elevação lateral com halteres",
       repeticao: "12 - 15",
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoD/elevacao-lateral-halteres.png'
     },
     {
       nome: "Elevação frontal com halteres ou barra",
       repeticao: "12 - 15",
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoD/elevacao-frontal.png'
     },
     {
       nome: "Encolhimento com barra para trapézio",
       repeticao: "10 - 12",
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoD/encolhimento-com-barra.png'
     },
     {
       nome: "Elevação posterior com halteres",
       repeticao: "12 - 15",
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoD/elevacao-posterior.png'
     },
     {
       nome: "Abdômen: prancha isométrica",
       repeticao: "30 - 60 segundos",
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoD/prancha-isometrica.png'
     },
     {
       nome: "Abdominal infra ou canivete no banco",
       repeticao: "15 - 20",
       serie: 3,
-      peso: 0
+      peso: 0,
+      linkCapa: '../../../assets/images/treinoD/abdominal-infra.png'
     }
   ]
 
