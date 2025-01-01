@@ -1,0 +1,25 @@
+main {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  gap: 20px;
+  align-items: center;
+  justify-content: start;
+  background-color: gray;
+  height: calc(100vh - 64px);
+}
+
+.card {
+  width: 350px;
+
+  .card-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+}
+
+@media screen and (max-width:1025px) {
+  main {
+    height: calc(100vh - 56px);
+  }
+}

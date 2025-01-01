@@ -1,0 +1,23 @@
+main > header {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  button {
+    width: 70px;
+    margin-right: 10px;
+
+    mat-icon {
+      margin: 0;
+    }
+  }
+}
+
+#imagem-exercicio {
+  margin-right: 10px;
+  height: auto;
+}
