@@ -42,7 +42,8 @@
             "ssr": {
               "entry": "server.ts"
             },
-            "baseHref": "/app-academia/"
+            "baseHref": "/app-academia/",
+            "deployUrl": "/app-academia/"
           },
           "configurations": {
             "production": {
@@ -58,7 +59,12 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true
             },
             "development": {
               "optimization": false,
