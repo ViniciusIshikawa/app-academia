@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { CardExercicioComponent } from '../../components/card-exercicio/card-exercicio.component';
 
 @Component({
   selector: 'app-exercicios',
@@ -14,7 +15,8 @@ import { Router } from '@angular/router';
     NavbarComponent,
     MatCardModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    CardExercicioComponent
   ],
   templateUrl: './exercicios.component.html',
   styleUrl: './exercicios.component.scss'
