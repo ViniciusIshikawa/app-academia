@@ -19,6 +19,7 @@
           "options": {
             "main": "src/main.ts",
             "outputPath": "dist/app-academia",
+            "baseHref": "/app-academia/",
             "index": "src/index.html",
             "polyfills": [
               "zone.js"
