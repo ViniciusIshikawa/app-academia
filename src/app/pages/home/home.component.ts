@@ -28,18 +28,23 @@ export class HomeComponent {
       exercicios: []
     },
     {
-      titulo: 'B: Costas e Bíceps',
+      titulo: 'B: Quadríceps',
       tipo: 'B',
       exercicios: []
     },
     {
-      titulo: 'C: Pernas',
+      titulo: 'C: Costas e Bíceps',
       tipo: 'C',
       exercicios: []
     },
     {
-      titulo: 'D: Ombros e Abdômen',
+      titulo: 'D: Posterior e Glúteo',
       tipo: 'D',
+      exercicios: []
+    },
+    {
+      titulo: 'E: Ombros e Abdômen',
+      tipo: 'E',
       exercicios: []
     },
   ];
