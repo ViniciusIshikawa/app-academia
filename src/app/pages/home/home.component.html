@@ -3,14 +3,27 @@
 </header>
 
 <main>
-  @for (treinos of treinoVini; track $index) {
+  @for (treino of treinoVini; track $index) {
     <mat-card class="card" appearance="outlined">
       <mat-card-header>
-        <mat-card-title>{{treinos.titulo}}</mat-card-title>
+        <mat-card-title>{{treino.titulo}}</mat-card-title>
       </mat-card-header>
       <mat-card-actions>
-        <button mat-flat-button color="primary" (click)="selecionarTreino(treinos.tipo)">Treinar</button>
+        <div>
+          <button mat-flat-button color="primary" (click)="comecarTreino(treino.id)">Treinar</button>
+        </div>
+
+        <div class="edit_delete">
+          <button (click)="editarTreino(treino.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button (click)="deletarTreino(treino.id, treino.titulo)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </mat-card-actions>
     </mat-card>
   }
+
+  <button mat-flat-button color="primary" (click)="criarNovoTreino()">Novo Treino</button>
 </main>

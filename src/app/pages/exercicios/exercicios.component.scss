@@ -1,3 +1,14 @@
+@import '../../../assets/styles/mixin';
+
+main {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  gap: 20px;
+  min-height: 100vh;
+  background-color: rgb(0, 0, 0);
+}
+
 main > header {
   display: flex;
   align-items: center;
@@ -14,5 +25,18 @@ main > header {
     mat-icon {
       margin: 0;
     }
+  }
+}
+
+.exercicios-card {
+  @include center-flex(column);
+  margin-bottom: 30px;
+
+  button, card-exercicio {
+    width: 450px;
+  }
+
+  card-exercicio {
+    padding-top: 20px;
   }
 }

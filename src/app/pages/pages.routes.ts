@@ -4,5 +4,5 @@ import { ExerciciosComponent } from './exercicios/exercicios.component';
 
 export const PAGE_ROUTES: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'exercicios', component: ExerciciosComponent }
+  { path: 'exercicios/:idTreino', component: ExerciciosComponent }
 ];

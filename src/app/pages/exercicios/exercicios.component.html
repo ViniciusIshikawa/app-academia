@@ -8,7 +8,13 @@
     <h1>{{titulo}}</h1>
   </header>
 
+  <div class="exercicios-card">
+    @if (btnNovoTreino) {
+      <button mat-flat-button color="primary" (click)="criarNovoExercicio()">Novo Exercicio</button>
+    }
+
     @for (exercicio of exerciciosTreino; track $index) {
       <card-exercicio [exercicio]="exercicio"></card-exercicio>
     }
+  </div>
 </main>

@@ -1,3 +1,5 @@
+@import '../../../assets/styles/mixin';
+
 main {
   display: flex;
   flex-direction: column;
@@ -5,16 +7,28 @@ main {
   gap: 20px;
   align-items: center;
   justify-content: start;
-  background-color: gray;
-  height: calc(100vh - 64px);
+  min-height: 100vh;
+  background-color: rgb(0, 0, 0);
 }
 
 .card {
   width: 350px;
+  background-color: #303030;
+  color: white;
 
-  .card-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
+  mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .edit_delete {
+    display: flex;
+    gap: 25px;
+
+    mat-icon {
+      color: rgb(0, 68, 255);
+    }
   }
 }
 

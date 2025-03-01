@@ -1,6 +1,8 @@
+import { Treino } from './../models/treino.model';
 import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
-import { getDatabase, onValue, ref, set, child, push, update, remove } from "firebase/database";
+import { getDatabase, onValue, ref, set, child, push, update, remove, get } from "firebase/database";
+import { Exercicio } from '../models/exercicio.model';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAK5jWxCHrjwZ2fei3eGny2ILzRdhnasKc",
@@ -22,23 +24,47 @@ export class FirebaseService {
 
   constructor() { }
 
-  static inserir(valor: any) {
-    set(ref(dbFireBase, 'Treino_A'), {
-      'Supino reto': {
-        'peso': '32kg',
-        'Reps': '10',
-        'Series': '3'
-      }
+  static inserirTreino(treino: string) {
+    const idTreino = push(ref(dbFireBase, 'treinos')).key;
+
+    set(ref(dbFireBase, 'treinos/' + idTreino), {
+      titulo: treino,
+      exercicios: {}
     });
   }
 
-  static consultar() {
-    const treino = ref(dbFireBase, 'Treino_A');
-    onValue(treino, (res) => {
-      const data = res.val();
-      console.log(data);
-    });
+  static async buscarTreinos(): Promise<Treino[]> {
+    const dbRef = ref(getDatabase());
+
+    const snapshot = await get(child(dbRef, 'treinos'));
+
+    if(!snapshot.val()) {
+      return null;
+    }
+
+    const treinos = Object.entries(snapshot.val()).map(([id, treino]) =>
+      typeof treino === 'object' && treino !== null ? { id, ...treino } : { id }
+    );
+
+    return treinos as Treino[];
   }
+
+  static async buscarExercicios(idTreino: string): Promise<Exercicio[]> {
+    const dbRef = ref(getDatabase());
+
+    const snapshot = await get(child(dbRef, 'treinos/' + idTreino + '/exercicios'));
+
+    if(!snapshot.val()) {
+      return null;
+    }
+
+    const exercicios = Object.entries(snapshot.val()).map(([id, exercicio]) =>
+      typeof exercicio === 'object' && exercicio !== null ? { id,  ...exercicio } : { id }
+    );
+
+    return exercicios as Exercicio[];
+  }
+
 
   static atualizar(objetoAlvo: any, novoValor: any): any{
     const updates: { [key: string]: any } = {};
@@ -48,11 +74,22 @@ export class FirebaseService {
     return update(ref(dbFireBase), updates);
   }
 
-  static remover(objetoAlvo: any) {
+  static removerTreino(idTreino: string) {
     const remove: { [key: string]: any } = {};
 
-    remove[objetoAlvo] = null;
+    remove['treinos/' + idTreino] = null;
 
     return update(ref(dbFireBase), remove);
+  }
+
+  static inserirExercicio(idTreino: string, exercicio: Exercicio) {
+    const idExercicio = push(ref(dbFireBase, `treinos/${idTreino}`)).key;
+
+    set(ref(dbFireBase, `treinos/${idTreino}/exercicios/${idExercicio}`), {
+      nome: exercicio.nome,
+      repeticao: exercicio.repeticao,
+      serie: exercicio.serie,
+      peso: exercicio.peso
+    });
   }
 }

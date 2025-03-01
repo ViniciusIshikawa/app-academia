@@ -1,0 +1,12 @@
+@import '../../../../assets/styles/mixin';
+
+.formCadastro {
+  @include center-flex(column);
+}
+
+.botoes {
+  @include center-flex(row);
+  gap: 10px;
+}
+
+

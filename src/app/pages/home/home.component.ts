@@ -1,22 +1,18 @@
 import { NavbarComponent } from './../../components/navbar/navbar.component';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy, model, signal, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { Treino } from '../../shared/models/treino.model';
-import { SessionStorageService } from '../../shared/services/session-storage.service';
 import { Router } from '@angular/router';
-import { initializeApp } from "firebase/app";
-import { getDatabase, onValue, ref, set } from "firebase/database";
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyAK5jWxCHrjwZ2fei3eGny2ILzRdhnasKc",
-//   authDomain: "banco-app-academia.firebaseapp.com",
-//   databaseURL: "https://banco-app-academia-default-rtdb.firebaseio.com",
-//   projectId: "banco-app-academia",
-//   storageBucket: "banco-app-academia.firebasestorage.app",
-//   messagingSenderId: "749182666411",
-//   appId: "1:749182666411:web:95ed9568ae75eed26459ee"
-// };
+import {FormsModule} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { NovoTreinoDialogComponent } from './novo-treino-dialog/novo-treino-dialog.component';
+import { FirebaseService } from '../../shared/services/firebase.service';
+import { MatIconModule } from '@angular/material/icon';
+import { ConfirmacaoDialogComponent } from '../../components/confirmacao-dialog/confirmacao-dialog.component';
+import { SessionStorageService } from '../../shared/services/session-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -24,45 +20,60 @@ import { getDatabase, onValue, ref, set } from "firebase/database";
   imports: [
     NavbarComponent,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatIconModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  readonly dialog = inject(MatDialog);
   private _router = inject(Router);
 
-  public treinoVini: Treino[] = [
-    {
-      titulo: 'A: Peito e Tríceps',
-      tipo: 'A',
-      exercicios: []
-    },
-    {
-      titulo: 'B: Quadríceps',
-      tipo: 'B',
-      exercicios: []
-    },
-    {
-      titulo: 'C: Costas e Bíceps',
-      tipo: 'C',
-      exercicios: []
-    },
-    {
-      titulo: 'D: Posterior e Glúteo',
-      tipo: 'D',
-      exercicios: []
-    },
-    {
-      titulo: 'E: Ombros e Abdômen',
-      tipo: 'E',
-      exercicios: []
-    },
-  ];
+  public treinoVini: Treino[] = [];
 
-  selecionarTreino(tipoTreino: string) {
-    SessionStorageService.inserir('treino', tipoTreino);
-    this._router.navigate(['home/exercicios']);
+  ngOnInit() {
+    this.pesquisar();
+  }
+
+  async pesquisar() {
+    this.treinoVini = await FirebaseService.buscarTreinos() ?? [];
+  }
+
+  criarNovoTreino() {
+    const dialogRef = this.dialog.open(NovoTreinoDialogComponent, {});
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.pesquisar();
+    });
+  }
+
+  deletarTreino(idTreino: string, tituloTreino: string) {
+    const dialogRef = this.dialog.open(ConfirmacaoDialogComponent, {
+      data: {
+        msg: `Deseja realmente excluir o treino: ${tituloTreino}?`
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        FirebaseService.removerTreino(idTreino);
+        this.pesquisar();
+      }
+    });
+  }
+
+  editarTreino(idTreino: string)  {
+    this._router.navigate(['home/exercicios/' + idTreino]);
+    SessionStorageService.inserir('tipoListaExercicios', 'edicao');
+  }
+
+  comecarTreino(idTreino: string) {
+    this._router.navigate(['home/exercicios/' + idTreino]);2
+    SessionStorageService.inserir('tipoListaExercicios', 'treino');
   }
 }
