@@ -1,11 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
-import { FirebaseService } from '../../../shared/services/firebase.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Exercicio } from '../../../shared/models/exercicio.model';
+import { DialogData } from '../exercicios.component';
+import { ExercicioFirebaseService } from '../../../shared/services/firebase/exercicio-firebase.service';
 
 @Component({
   selector: 'app-novo-exercicio-dialog',
@@ -24,17 +25,33 @@ import { Exercicio } from '../../../shared/models/exercicio.model';
   templateUrl: './novo-exercicio-dialog.component.html',
   styleUrl: './novo-exercicio-dialog.component.scss'
 })
-export class NovoExercicioDialogComponent {
+export class NovoExercicioDialogComponent implements OnInit {
   public _formBuilder = inject(FormBuilder);
+  public titulo: string;
+
   readonly dialogRef = inject(MatDialogRef<NovoExercicioDialogComponent>);
-  readonly idTreino = inject<string>(MAT_DIALOG_DATA);
+  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
 
   public formExercicio = this._formBuilder.group({
-    nome: [null, Validators.required],
-    peso: [null, Validators.required],
-    series: [null, Validators.required],
-    repeticoes: [null, Validators.required]
+    nome: ['', Validators.required],
+    peso: ['', Validators.required],
+    series: ['', Validators.required],
+    repeticoes: ['', Validators.required]
   });
+
+  ngOnInit(): void {
+    if(this.data.tipo === 'adicao') {
+      this.titulo = 'Cadastrar Novo Exercício';
+    } else if(this.data.tipo === 'edicao') {
+      this.titulo = 'Alterar Exercício';
+      this.formExercicio.setValue({
+        nome: this.data.exercicio.nome,
+        peso: this.data.exercicio.peso,
+        series: this.data.exercicio.serie,
+        repeticoes: this.data.exercicio.repeticao
+      });
+    }
+  }
 
   adicionarExercicio() {
     const exercicio: Exercicio = {
@@ -44,7 +61,19 @@ export class NovoExercicioDialogComponent {
       peso: this.formExercicio.get('peso').value,
     }
 
-    FirebaseService.inserirExercicio(this.idTreino, exercicio);
+    ExercicioFirebaseService.inserirExercicio(this.data.idTreino, exercicio);
+    this.dialogRef.close();
+  }
+
+  alterarExercicio() {
+    const exercicioAlterado: Exercicio = {
+      id: this.data.exercicio.id,
+      nome: this.formExercicio.get('nome').value,
+      repeticao: this.formExercicio.get('repeticoes').value,
+      serie: this.formExercicio.get('series').value,
+      peso: this.formExercicio.get('peso').value,
+    }
+    ExercicioFirebaseService.alerarExercicio(this.data.idTreino, exercicioAlterado);
     this.dialogRef.close();
   }
 }

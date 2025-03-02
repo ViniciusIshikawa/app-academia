@@ -1,5 +1,6 @@
+import { TreinoFirebaseService } from './../../shared/services/firebase/treino-firebase.service';
 import { NavbarComponent } from './../../components/navbar/navbar.component';
-import { Component, inject, ChangeDetectionStrategy, model, signal, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { Treino } from '../../shared/models/treino.model';
@@ -9,7 +10,6 @@ import { MatDialog } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { NovoTreinoDialogComponent } from './novo-treino-dialog/novo-treino-dialog.component';
-import { FirebaseService } from '../../shared/services/firebase.service';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmacaoDialogComponent } from '../../components/confirmacao-dialog/confirmacao-dialog.component';
 import { SessionStorageService } from '../../shared/services/session-storage.service';
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   }
 
   async pesquisar() {
-    this.treinoVini = await FirebaseService.buscarTreinos() ?? [];
+    this.treinoVini = await TreinoFirebaseService.buscarTreinos() ?? [];
   }
 
   criarNovoTreino() {
@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        FirebaseService.removerTreino(idTreino);
+        TreinoFirebaseService.removerTreino(idTreino);
         this.pesquisar();
       }
     });

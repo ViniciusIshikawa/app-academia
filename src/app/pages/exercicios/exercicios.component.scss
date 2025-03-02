@@ -32,11 +32,34 @@ main > header {
   @include center-flex(column);
   margin-bottom: 30px;
 
-  button, card-exercicio {
+  #btnIncluir, mat-card {
     width: 450px;
   }
+}
 
-  card-exercicio {
-    padding-top: 20px;
+mat-card {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  background-color: #303030;
+  color: white;
+  margin-top: 15px;
+}
+
+mat-card-subtitle {
+  background-color: #303030;
+  color: white;
+}
+
+.mat-mdc-card-header {
+  padding: 0 16px 0;
+}
+
+.edit_delete {
+  display: flex;
+  gap: 25px;
+
+  mat-icon {
+    color: rgb(0, 68, 255);
   }
 }

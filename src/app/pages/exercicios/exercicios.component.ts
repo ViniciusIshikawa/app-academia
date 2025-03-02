@@ -6,12 +6,17 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { CardExercicioComponent } from '../../components/card-exercicio/card-exercicio.component';
 import { ActivatedRoute } from '@angular/router';
-import { FirebaseService } from '../../shared/services/firebase.service';
-import { Treino } from '../../shared/models/treino.model';
 import { MatDialog } from '@angular/material/dialog';
 import { NovoExercicioDialogComponent } from './novo-exercicio-dialog/novo-exercicio-dialog.component';
+import { ConfirmacaoDialogComponent } from '../../components/confirmacao-dialog/confirmacao-dialog.component';
+import { ExercicioFirebaseService } from '../../shared/services/firebase/exercicio-firebase.service';
+
+export interface DialogData {
+  tipo: string,
+  idTreino: string,
+  exercicio: Exercicio
+}
 
 @Component({
   selector: 'app-exercicios',
@@ -20,8 +25,7 @@ import { NovoExercicioDialogComponent } from './novo-exercicio-dialog/novo-exerc
     NavbarComponent,
     MatCardModule,
     MatIconModule,
-    MatButtonModule,
-    CardExercicioComponent
+    MatButtonModule
   ],
   templateUrl: './exercicios.component.html',
   styleUrl: './exercicios.component.scss'
@@ -34,20 +38,27 @@ export class ExerciciosComponent implements OnInit{
   public idTreino: string;
   public exerciciosTreino: Exercicio[];
   public titulo: string;
-
+  public isOverlayVisible: boolean = false;
   public btnNovoTreino: boolean;
+  public tipoListagem: string;
 
   async ngOnInit() {
-    const tipoListagem = SessionStorageService.buscar('tipoListaExercicios');
+    this.tipoListagem = SessionStorageService.buscar('tipoListaExercicios');
     this.titulo = SessionStorageService.buscar('tituloTreino');
 
-    if(tipoListagem === 'edicao') {
+    if(this.tipoListagem === 'edicao') {
       this.btnNovoTreino = true;
-    } else if(tipoListagem === 'treino') {
+    } else if(this.tipoListagem === 'treino') {
       this.btnNovoTreino = false;
     }
 
     this.pesquisar();
+  }
+
+  toggleOverlay(): void {
+    if(this.tipoListagem === 'treino') {
+      this.isOverlayVisible = !this.isOverlayVisible;
+    }
   }
 
   async pesquisar() {
@@ -55,7 +66,7 @@ export class ExerciciosComponent implements OnInit{
       this.idTreino = params.get('idTreino');
     });
 
-    this.exerciciosTreino = await FirebaseService.buscarExercicios(this.idTreino) as Exercicio[];
+    this.exerciciosTreino = await ExercicioFirebaseService.buscarExercicios(this.idTreino) as Exercicio[];
   }
 
   voltar() {
@@ -64,11 +75,43 @@ export class ExerciciosComponent implements OnInit{
 
   criarNovoExercicio() {
     const dialogRef = this.dialog.open(NovoExercicioDialogComponent, {
-      data: this.idTreino
+      data: {
+        tipo: this.tipoListagem,
+        idTreino: this.idTreino
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.pesquisar();
+    });
+  }
+
+  editarExercicio(exercicio: Exercicio) {
+    const dialogRef = this.dialog.open(NovoExercicioDialogComponent, {
+      data: {
+        tipo: this.tipoListagem,
+        idTreino: this.idTreino,
+        exercicio: exercicio
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.pesquisar();
+    });
+  }
+
+  excluirExercicio(exercicio: Exercicio) {
+    const dialogRef = this.dialog.open(ConfirmacaoDialogComponent, {
+      data: {
+        msg: `Deseja realmente excluir o exercício: ${exercicio.nome}?`
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        ExercicioFirebaseService.removerExercicio(this.idTreino, exercicio.id);
+        this.pesquisar();
+      }
     });
   }
 }

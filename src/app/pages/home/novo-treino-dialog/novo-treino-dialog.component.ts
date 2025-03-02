@@ -1,12 +1,10 @@
-import { get } from 'firebase/database';
+import { TreinoFirebaseService } from './../../../shared/services/firebase/treino-firebase.service';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FirebaseService } from '../../../shared/services/firebase.service';
-import { Treino } from '../../../shared/models/treino.model';
 
 @Component({
   selector: 'app-novo-treino-dialog',
@@ -34,7 +32,7 @@ export class NovoTreinoDialogComponent {
   });
 
   adicionarTreino() {
-    FirebaseService.inserirTreino(this.formTreino.get('titulo')?.value);
+    TreinoFirebaseService.inserirTreino(this.formTreino.get('titulo')?.value);
     this.dialogRef.close();
   }
 }
