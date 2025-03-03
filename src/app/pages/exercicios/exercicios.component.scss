@@ -63,3 +63,9 @@ mat-card-subtitle {
     color: rgb(0, 68, 255);
   }
 }
+
+@media screen and (max-width:1025px) {
+  #btnIncluir, mat-card {
+    width: 100% !important;
+  }
+}

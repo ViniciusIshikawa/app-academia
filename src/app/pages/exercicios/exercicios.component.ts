@@ -76,7 +76,7 @@ export class ExerciciosComponent implements OnInit{
   criarNovoExercicio() {
     const dialogRef = this.dialog.open(NovoExercicioDialogComponent, {
       data: {
-        tipo: this.tipoListagem,
+        tipo: 'adicao',
         idTreino: this.idTreino
       }
     });
@@ -89,7 +89,7 @@ export class ExerciciosComponent implements OnInit{
   editarExercicio(exercicio: Exercicio) {
     const dialogRef = this.dialog.open(NovoExercicioDialogComponent, {
       data: {
-        tipo: this.tipoListagem,
+        tipo: 'edicao',
         idTreino: this.idTreino,
         exercicio: exercicio
       }
