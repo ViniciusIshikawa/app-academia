@@ -1,4 +1,3 @@
-import { TreinoFirebaseService } from './../../shared/services/firebase/treino-firebase.service';
 import { NavbarComponent } from './../../components/navbar/navbar.component';
 import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,6 +12,8 @@ import { NovoTreinoDialogComponent } from './novo-treino-dialog/novo-treino-dial
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmacaoDialogComponent } from '../../components/confirmacao-dialog/confirmacao-dialog.component';
 import { SessionStorageService } from '../../shared/services/session-storage.service';
+import { WorkoutsService } from '../../shared/services/workouts.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ import { SessionStorageService } from '../../shared/services/session-storage.ser
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatIconModule,
+    MatIconModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -33,15 +34,17 @@ import { SessionStorageService } from '../../shared/services/session-storage.ser
 export class HomeComponent implements OnInit {
   readonly dialog = inject(MatDialog);
   private _router = inject(Router);
+  private _workoutsService = inject(WorkoutsService);
 
-  public treinoVini: Treino[] = [];
+  public workouts: Treino[] = [];
 
   ngOnInit() {
     this.pesquisar();
   }
 
   async pesquisar() {
-    this.treinoVini = await TreinoFirebaseService.buscarTreinos() ?? [];
+    this.workouts = await this._workoutsService.getAllWorkouts();
+    //this.treinoVini = await TreinoFirebaseService.buscarTreinos() ?? [];
   }
 
   criarNovoTreino() {
@@ -61,7 +64,7 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        TreinoFirebaseService.removerTreino(idTreino);
+        //TreinoFirebaseService.removerTreino(idTreino);
         this.pesquisar();
       }
     });

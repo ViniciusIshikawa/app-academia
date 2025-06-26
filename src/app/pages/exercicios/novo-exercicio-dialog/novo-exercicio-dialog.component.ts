@@ -6,7 +6,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Exercicio } from '../../../shared/models/exercicio.model';
 import { DialogData } from '../exercicios.component';
-import { ExercicioFirebaseService } from '../../../shared/services/firebase/exercicio-firebase.service';
 
 @Component({
   selector: 'app-novo-exercicio-dialog',
@@ -61,7 +60,7 @@ export class NovoExercicioDialogComponent implements OnInit {
       peso: this.formExercicio.get('peso').value,
     }
 
-    ExercicioFirebaseService.inserirExercicio(this.data.idTreino, exercicio);
+    //ExercicioFirebaseService.inserirExercicio(this.data.idTreino, exercicio);
     this.dialogRef.close();
   }
 
@@ -73,7 +72,8 @@ export class NovoExercicioDialogComponent implements OnInit {
       serie: this.formExercicio.get('series').value,
       peso: this.formExercicio.get('peso').value,
     }
-    ExercicioFirebaseService.alerarExercicio(this.data.idTreino, exercicioAlterado);
+
+    //ExercicioFirebaseService.alerarExercicio(this.data.idTreino, exercicioAlterado);
     this.dialogRef.close();
   }
 }

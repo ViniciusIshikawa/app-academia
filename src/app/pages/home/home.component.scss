@@ -8,7 +8,23 @@ main {
   align-items: center;
   justify-content: start;
   min-height: 100vh;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(14, 14, 14);
+}
+
+.main-card {
+  background-color: #1f1f1f;
+}
+
+.card-workouts {
+  @include center-flex(row);
+
+  width: 500px;
+  margin-top: 20px;
+}
+
+#card-workouts-header {
+  background-color: #303030;
+  color: white;
 }
 
 .card {

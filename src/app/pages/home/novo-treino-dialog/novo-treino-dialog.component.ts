@@ -1,4 +1,3 @@
-import { TreinoFirebaseService } from './../../../shared/services/firebase/treino-firebase.service';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,9 +29,4 @@ export class NovoTreinoDialogComponent {
   public formTreino = this._formBuilder.group({
     titulo: [null, Validators.required]
   });
-
-  adicionarTreino() {
-    TreinoFirebaseService.inserirTreino(this.formTreino.get('titulo')?.value);
-    this.dialogRef.close();
-  }
 }

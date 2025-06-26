@@ -10,7 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { NovoExercicioDialogComponent } from './novo-exercicio-dialog/novo-exercicio-dialog.component';
 import { ConfirmacaoDialogComponent } from '../../components/confirmacao-dialog/confirmacao-dialog.component';
-import { ExercicioFirebaseService } from '../../shared/services/firebase/exercicio-firebase.service';
+import { WorkoutsService } from '../../shared/services/workouts.service';
+import { Treino } from '../../shared/models/treino.model';
 
 export interface DialogData {
   tipo: string,
@@ -30,13 +31,14 @@ export interface DialogData {
   templateUrl: './exercicios.component.html',
   styleUrl: './exercicios.component.scss'
 })
-export class ExerciciosComponent implements OnInit{
+export class ExerciciosComponent implements OnInit {
   private _router = inject(Router);
   readonly dialog = inject(MatDialog);
   private _activatedRoute = inject(ActivatedRoute);
+  private _workoutsService = inject(WorkoutsService);
 
   public idTreino: string;
-  public exerciciosTreino: Exercicio[];
+  public treinoSelecionado: Treino;
   public titulo: string;
   public isOverlayVisible: boolean = false;
   public btnNovoTreino: boolean;
@@ -66,7 +68,7 @@ export class ExerciciosComponent implements OnInit{
       this.idTreino = params.get('idTreino');
     });
 
-    this.exerciciosTreino = await ExercicioFirebaseService.buscarExercicios(this.idTreino) as Exercicio[];
+    this.treinoSelecionado = await this._workoutsService.getWorkoutByID(this.idTreino);
   }
 
   voltar() {
@@ -109,7 +111,7 @@ export class ExerciciosComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        ExercicioFirebaseService.removerExercicio(this.idTreino, exercicio.id);
+        //ExercicioFirebaseService.removerExercicio(this.idTreino, exercicio.id);
         this.pesquisar();
       }
     });
