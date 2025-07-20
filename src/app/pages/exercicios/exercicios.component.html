@@ -4,18 +4,20 @@
 
 <main>
   <header>
-    <button mat-flat-button color="primary" (click)="voltar()"><mat-icon>arrow_back</mat-icon></button>
+    <button mat-icon-button (click)="voltar()"><mat-icon>arrow_back</mat-icon></button>
     <h1>{{titulo}}</h1>
   </header>
 
+  <div class="selected-workout">
+    <div class="selected-workout-title">
+      <span>{{treinoSelecionado.titulo}}</span>
+    </div>
+  </div>
+
   <div class="exercicios-card">
-    @if (btnNovoTreino) {
-      <button id="btnIncluir" mat-flat-button color="primary" (click)="criarNovoExercicio()">Novo Exercicio</button>
-    }
-    
     @if (treinoSelecionado?.exercicios) {
       @for (exercicio of treinoSelecionado.exercicios; track $index) {
-        <mat-card appearance="outlined" (click)="toggleOverlay()">
+        <mat-card appearance="outlined">
           <mat-card-header>
             <mat-card-title-group>
               <mat-card-title>{{exercicio.nome}}</mat-card-title>
@@ -28,23 +30,8 @@
               </mat-card-subtitle>
             </mat-card-title-group>
           </mat-card-header>
-
-          @if (tipoListagem === 'edicao') {
-            <mat-card-actions>
-              <div class="edit_delete">
-                <button (click)="editarExercicio(exercicio)">
-                  <mat-icon>edit</mat-icon>
-                </button>
-
-                <button (click)="excluirExercicio(exercicio)">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-            </mat-card-actions>
-          }
         </mat-card>
       }
     }
-
   </div>
 </main>

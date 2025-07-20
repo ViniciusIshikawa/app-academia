@@ -60,7 +60,6 @@ export class NovoExercicioDialogComponent implements OnInit {
       peso: this.formExercicio.get('peso').value,
     }
 
-    //ExercicioFirebaseService.inserirExercicio(this.data.idTreino, exercicio);
     this.dialogRef.close();
   }
 
@@ -73,7 +72,6 @@ export class NovoExercicioDialogComponent implements OnInit {
       peso: this.formExercicio.get('peso').value,
     }
 
-    //ExercicioFirebaseService.alerarExercicio(this.data.idTreino, exercicioAlterado);
     this.dialogRef.close();
   }
 }

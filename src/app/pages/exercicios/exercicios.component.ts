@@ -57,12 +57,6 @@ export class ExerciciosComponent implements OnInit {
     this.pesquisar();
   }
 
-  toggleOverlay(): void {
-    if(this.tipoListagem === 'treino') {
-      this.isOverlayVisible = !this.isOverlayVisible;
-    }
-  }
-
   async pesquisar() {
     this._activatedRoute.paramMap.subscribe( params => {
       this.idTreino = params.get('idTreino');
@@ -73,47 +67,5 @@ export class ExerciciosComponent implements OnInit {
 
   voltar() {
     this._router.navigate(['home']);
-  }
-
-  criarNovoExercicio() {
-    const dialogRef = this.dialog.open(NovoExercicioDialogComponent, {
-      data: {
-        tipo: 'adicao',
-        idTreino: this.idTreino
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.pesquisar();
-    });
-  }
-
-  editarExercicio(exercicio: Exercicio) {
-    const dialogRef = this.dialog.open(NovoExercicioDialogComponent, {
-      data: {
-        tipo: 'edicao',
-        idTreino: this.idTreino,
-        exercicio: exercicio
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.pesquisar();
-    });
-  }
-
-  excluirExercicio(exercicio: Exercicio) {
-    const dialogRef = this.dialog.open(ConfirmacaoDialogComponent, {
-      data: {
-        msg: `Deseja realmente excluir o exercício: ${exercicio.nome}?`
-      },
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        //ExercicioFirebaseService.removerExercicio(this.idTreino, exercicio.id);
-        this.pesquisar();
-      }
-    });
   }
 }

@@ -24,7 +24,23 @@ main > header {
 
     mat-icon {
       margin: 0;
+      color: yellow;
     }
+  }
+}
+
+.selected-workout {
+  @include center-flex(row);
+
+  .selected-workout-title {
+    @include center-flex(row);
+
+    color: white;
+    background-color: rgba(206, 206, 0, 0.521);
+    border-radius: 10px;
+    width: 450px;
+    height: 50px;
+    font-size:20px;
   }
 }
 
@@ -32,7 +48,7 @@ main > header {
   @include center-flex(column);
   margin-bottom: 30px;
 
-  #btnIncluir, mat-card {
+  mat-card {
     width: 450px;
   }
 }
@@ -53,19 +69,4 @@ mat-card-subtitle {
 
 .mat-mdc-card-header {
   padding: 0 16px 0;
-}
-
-.edit_delete {
-  display: flex;
-  gap: 25px;
-
-  mat-icon {
-    color: rgb(0, 68, 255);
-  }
-}
-
-@media screen and (max-width:1025px) {
-  #btnIncluir, mat-card {
-    width: 100% !important;
-  }
 }

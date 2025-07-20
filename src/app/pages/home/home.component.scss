@@ -28,22 +28,25 @@ main {
 }
 
 .card {
+  @include center-flex(row);
+  gap: 10px;
   width: 350px;
   background-color: #303030;
   color: white;
 
-  mat-card-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .mat-mdc-card-header {
+    padding: 0;
   }
 
-  .edit_delete {
-    display: flex;
-    gap: 25px;
+  #btn-play-workout {
+    background-color: yellow;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
 
     mat-icon {
-      color: rgb(0, 68, 255);
+      @include center-flex(row);
+      width: auto;
     }
   }
 }

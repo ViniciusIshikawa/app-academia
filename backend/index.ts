@@ -29,6 +29,30 @@ const workouts: Workout[] = [
         repeticao: '12',
         serie: '3',
         peso: 'corporal'
+      },
+      {
+        nome: 'Squats',
+        repeticao: '15',
+        serie: '3',
+        peso: 'corporal'
+      },
+      {
+        nome: 'Plank',
+        repeticao: '3',
+        serie: '3 seconds',
+        peso: 'corporal'
+      },
+      {
+        nome: 'Glute-Bridge',
+        repeticao: '12',
+        serie: '3',
+        peso: 'corporal'
+      },
+      {
+        nome: 'Australian-Row',
+        repeticao: '8',
+        serie: '3',
+        peso: 'corporal'
       }
     ]
   }

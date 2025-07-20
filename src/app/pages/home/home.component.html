@@ -16,15 +16,8 @@
           </mat-card-header>
           <mat-card-actions>
             <div>
-              <button mat-flat-button color="primary" (click)="comecarTreino(treino.id)">Treinar</button>
-            </div>
-
-            <div class="edit_delete">
-              <button (click)="editarTreino(treino.id)">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button (click)="deletarTreino(treino.id, treino.titulo)">
-                <mat-icon>delete</mat-icon>
+              <button id="btn-play-workout" (click)="comecarTreino(treino.id)">
+                <mat-icon>play_arrow</mat-icon>
               </button>
             </div>
           </mat-card-actions>
@@ -32,7 +25,4 @@
       }
     </mat-card-content>
   </mat-card>
-
-
-  <button mat-flat-button color="primary" (click)="criarNovoTreino()">Novo Treino</button>
 </main>

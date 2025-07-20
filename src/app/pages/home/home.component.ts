@@ -13,7 +13,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { ConfirmacaoDialogComponent } from '../../components/confirmacao-dialog/confirmacao-dialog.component';
 import { SessionStorageService } from '../../shared/services/session-storage.service';
 import { WorkoutsService } from '../../shared/services/workouts.service';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -44,7 +43,6 @@ export class HomeComponent implements OnInit {
 
   async pesquisar() {
     this.workouts = await this._workoutsService.getAllWorkouts();
-    //this.treinoVini = await TreinoFirebaseService.buscarTreinos() ?? [];
   }
 
   criarNovoTreino() {
@@ -64,7 +62,6 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        //TreinoFirebaseService.removerTreino(idTreino);
         this.pesquisar();
       }
     });
